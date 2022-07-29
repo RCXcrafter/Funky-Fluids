@@ -9,59 +9,15 @@ import net.minecraft.world.phys.Vec3;
 
 public class LowFrictionType extends FunkyFluidType {
 
-	public LowFrictionType(Properties properties, String name, int color) {
-		super(properties, name, color);
+	public LowFrictionType(Properties properties, FunkyFluidInfo info) {
+		super(properties, info);
 	}
 
 	public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {
-		/*//System.out.println("movement vector: " + movementVector);
-		//System.out.println("speed: " + entity.getSpeed());
-		//System.out.println("motion: " + Math.abs(entity.getDeltaMovement().length()));
-		boolean flag = entity.getDeltaMovement().y <= 0.0D;
-		double d9 = entity.getY();
-		float f4 = 0.8F;
-		//f4 /= 1 + Math.abs(entity.getDeltaMovement().length() * 4.0);
-		//f4--;
-		float f5 = 0.02F;
-		float f6 = (float)EnchantmentHelper.getDepthStrider(entity);
-		if (f6 > 3.0F) {
-			f6 = 3.0F;
-		}
-
-		if (!entity.isOnGround()) {
-			f6 *= 0.5F;
-		}
-
-		if (f6 > 0.0F) {
-			f4 += (0.54600006F - f4) * f6 / 3.0F;
-			f5 += (entity.getSpeed() - f5) * f6 / 3.0F;
-		}
-
-		if (entity.hasEffect(MobEffects.DOLPHINS_GRACE)) {
-			f4 = 0.96F;
-		}
-
-		f5 *= (float)entity.getAttribute(ForgeMod.SWIM_SPEED.get()).getValue();
-		entity.moveRelative(f5, movementVector);
-		entity.move(MoverType.SELF, entity.getDeltaMovement());
-		Vec3 vec36 = entity.getDeltaMovement();
-		if (entity.horizontalCollision && entity.onClimbable()) {
-			vec36 = new Vec3(vec36.x, 0.2D, vec36.z);
-		}
-
-		entity.setDeltaMovement(vec36.multiply((double)f4, (double)0.8F, (double)f4));
-		Vec3 vec32 = entity.getFluidFallingAdjustedMovement(gravity, flag, entity.getDeltaMovement());
-
-		vec32 = vec32.scale(1.0 / (1 + Math.abs(entity.getDeltaMovement().length() * 8.0)));
-
-		entity.setDeltaMovement(vec32);*/
-		/*if (entity.horizontalCollision && entity.isFree(vec32.x, vec32.y + (double)0.6F - entity.getY() + d9, vec32.z)) {
-			entity.setDeltaMovement(vec32.x, (double)0.3F, vec32.z);
-		}*/
 		entity.setOnGround(true);
 
 		BlockPos blockpos = this.getBlockPosBelowThatAffectsMyMovement(entity);
-		float f2 = 0.4f;//entity.level.getBlockState(this.getBlockPosBelowThatAffectsMyMovement(entity)).getFriction(entity.level, this.getBlockPosBelowThatAffectsMyMovement(entity), entity);
+		float f2 = 0.4f;
 		float f3 = entity.isOnGround() ? f2 * 0.91F : 0.91F;
 		Vec3 vec35 = entity.handleRelativeFrictionAndCalculateMovement(movementVector, f2);
 		double d2 = vec35.y;

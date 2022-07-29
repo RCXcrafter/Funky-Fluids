@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "funkyfluids:block/fluid/melonade_still"
+  }
+}

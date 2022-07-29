@@ -1,0 +1,17 @@
+{
+  "type": "funkyfluids:crafting_shapeless_consuming",
+  "ingredients": [
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    }
+  ],
+  "result": {
+    "item": "funkyfluids:oobleck_bucket"
+  }
+}

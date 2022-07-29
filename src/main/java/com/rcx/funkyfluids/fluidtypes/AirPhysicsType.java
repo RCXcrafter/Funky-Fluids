@@ -1,6 +1,6 @@
 package com.rcx.funkyfluids.fluidtypes;
 
-import com.rcx.funkyfluids.FunkyFluidsUtil;
+import com.rcx.funkyfluids.util.FunkyFluidsUtil;
 
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -8,10 +8,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 
-public class SolidType extends FunkyFluidType {
+public class AirPhysicsType extends FunkyFluidType {
 
-	public SolidType(Properties properties, String name, int color) {
-		super(properties, name, color);
+	public AirPhysicsType(Properties properties, FunkyFluidInfo info) {
+		super(properties, info);
 	}
 
 	public boolean canSwim(Entity entity) {

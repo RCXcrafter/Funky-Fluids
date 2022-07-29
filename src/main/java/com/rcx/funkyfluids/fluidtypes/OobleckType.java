@@ -1,6 +1,6 @@
 package com.rcx.funkyfluids.fluidtypes;
 
-import com.rcx.funkyfluids.FunkyFluidsUtil;
+import com.rcx.funkyfluids.util.FunkyFluidsUtil;
 
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -18,8 +18,8 @@ public class OobleckType extends FunkyFluidType {
 	public static final float FRICTION = 0.6F;
 	public static final double RESISTANCE_MULTIPLIER = 20.0D;
 
-	public OobleckType(Properties properties, String name, int color) {
-		super(properties, name, color);
+	public OobleckType(Properties properties, FunkyFluidInfo info) {
+		super(properties, info);
 	}
 
 	public boolean canSwim(Entity entity) {

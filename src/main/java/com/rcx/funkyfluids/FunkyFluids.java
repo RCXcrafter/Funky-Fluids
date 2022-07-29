@@ -9,6 +9,8 @@ import com.rcx.funkyfluids.datagen.FunkyFluidsLang;
 import com.rcx.funkyfluids.datagen.FunkyFluidsLootTables;
 import com.rcx.funkyfluids.datagen.FunkyFluidsRecipes;
 
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -34,6 +36,7 @@ public class FunkyFluids {
 		modEventBus.addListener(this::commonSetup);
 		modEventBus.addListener(this::gatherData);
 
+		FunkyFluidsResources.RECIPE_SERIALIZERS.register(modEventBus);
 		FunkyFluidsResources.BLOCKS.register(modEventBus);
 		FunkyFluidsResources.ITEMS.register(modEventBus);
 		FunkyFluidsResources.FLUIDTYPES.register(modEventBus);
@@ -44,6 +47,7 @@ public class FunkyFluids {
 
 	public void commonSetup(final FMLCommonSetupEvent event) {
 		//FunkyFluidsPacketHandler.init();
+		FunkyFluidsResources.registerFluidInteractions();
 	}
 
 	public void gatherData(GatherDataEvent event) {
@@ -70,6 +74,8 @@ public class FunkyFluids {
 
 		@SubscribeEvent
 		public static void onClientSetup(FMLClientSetupEvent event) {
+			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.melonade.FLUID.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.melonade.FLUID_FLOW.get(), RenderType.translucent());
 			//MinecraftForge.EVENT_BUS.addListener(ClientModEvents::handleClientJump);
 		}
 

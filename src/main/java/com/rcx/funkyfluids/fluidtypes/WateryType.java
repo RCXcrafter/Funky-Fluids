@@ -11,8 +11,8 @@ import net.minecraftforge.common.ForgeMod;
 
 public class WateryType extends FunkyFluidType {
 
-	public WateryType(Properties properties, String name, int color) {
-		super(properties, name, color);
+	public WateryType(Properties properties, FunkyFluidInfo info) {
+		super(properties, info);
 	}
 
 	public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {

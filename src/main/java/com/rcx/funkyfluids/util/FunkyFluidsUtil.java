@@ -1,4 +1,4 @@
-package com.rcx.funkyfluids;
+package com.rcx.funkyfluids.util;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;

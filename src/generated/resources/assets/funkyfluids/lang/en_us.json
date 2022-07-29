@@ -1,5 +1,10 @@
 {
+  "block.funkyfluids.melonade_block": "Melonade",
   "block.funkyfluids.oobleck_block": "Oobleck",
+  "fluid.funkyfluids.melonade": "Melonade",
   "fluid.funkyfluids.oobleck": "Oobleck",
-  "item.funkyfluids.oobleck_bucket": "Oobleck Bucket"
+  "item.funkyfluids.melonade_bucket": "Melonade Bucket",
+  "item.funkyfluids.melonade_bucket.lore": "When life gives you melons...",
+  "item.funkyfluids.oobleck_bucket": "Oobleck Bucket",
+  "item.funkyfluids.oobleck_bucket.lore": "Non-Newtonian"
 }

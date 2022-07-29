@@ -23,15 +23,19 @@ public class FunkyFluidType extends FluidType {
 	public final ResourceLocation TEXTURE_FLOW;
 	public final ResourceLocation TEXTURE_OVERLAY;
 	public final Vector3f FOG_COLOR;
+	public final float fogStart;
+	public final float fogEnd;
 
-	public FunkyFluidType(Properties properties, String name, int color) {
+	public FunkyFluidType(Properties properties, FunkyFluidInfo info) {
 		super(properties);
-		RENDER_OVERLAY = new ResourceLocation(FunkyFluids.MODID, "textures/overlay/" + name + ".png");
-		TEXTURE_STILL = new ResourceLocation(FunkyFluids.MODID, "block/fluid/" + name + "_still");
-		TEXTURE_FLOW = new ResourceLocation(FunkyFluids.MODID, "block/fluid/" + name + "_flow");
-		TEXTURE_OVERLAY = new ResourceLocation(FunkyFluids.MODID, "block/fluid/" + name + "_overlay");
-		Color colorObject = new Color(color);
+		RENDER_OVERLAY = new ResourceLocation(FunkyFluids.MODID, "textures/overlay/" + info.name + ".png");
+		TEXTURE_STILL = new ResourceLocation(FunkyFluids.MODID, "block/fluid/" + info.name + "_still");
+		TEXTURE_FLOW = new ResourceLocation(FunkyFluids.MODID, "block/fluid/" + info.name + "_flow");
+		TEXTURE_OVERLAY = new ResourceLocation(FunkyFluids.MODID, "block/fluid/" + info.name + "_overlay");
+		Color colorObject = new Color(info.color);
 		FOG_COLOR = new Vector3f(colorObject.getRed()/255F, colorObject.getGreen()/255F, colorObject.getBlue()/255F);
+		fogStart = info.fogStart;
+		fogEnd = info.fogEnd;
 	}
 
 	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
@@ -58,14 +62,29 @@ public class FunkyFluidType extends FluidType {
 
 			@Override
 			public Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level, int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor) {
-				return fluidFogColor;
+				return FOG_COLOR;
 			}
 
 			@Override
 			public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick, float nearDistance, float farDistance, FogShape shape) {
-				RenderSystem.setShaderFogStart(0.1F);
-				RenderSystem.setShaderFogEnd(1.5F);
+				RenderSystem.setShaderFogStart(fogStart);
+				RenderSystem.setShaderFogEnd(fogEnd);
 			}
 		});
+	}
+
+	public static class FunkyFluidInfo {
+
+		public String name;
+		public int color;
+		public float fogStart;
+		public float fogEnd;
+
+		public FunkyFluidInfo(String name, int color, float fogStart, float fogEnd) {
+			this.name = name;
+			this.color = color;
+			this.fogStart = fogStart;
+			this.fogEnd = fogEnd;
+		}
 	}
 }
