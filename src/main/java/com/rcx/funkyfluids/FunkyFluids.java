@@ -76,6 +76,8 @@ public class FunkyFluids {
 		public static void onClientSetup(FMLClientSetupEvent event) {
 			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.melonade.FLUID.get(), RenderType.translucent());
 			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.melonade.FLUID_FLOW.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.liquidCrystal.FLUID.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.liquidCrystal.FLUID_FLOW.get(), RenderType.translucent());
 			//MinecraftForge.EVENT_BUS.addListener(ClientModEvents::handleClientJump);
 		}
 

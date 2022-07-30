@@ -27,9 +27,6 @@ public class OobleckBlock extends LiquidBlock {
 	public VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
 		if (pContext instanceof EntityCollisionContext) {
 			Entity entity = ((EntityCollisionContext) pContext).getEntity();
-			//if (entity != null)
-				//System.out.println("collision motion: " + Math.abs(entity.getDeltaMovement().length()));
-
 			if (entity != null && entity.getFluidTypeHeight(FunkyFluidsResources.oobleck.TYPE.get()) < 0.2d && Math.abs(entity.getDeltaMovement().length()) > OobleckType.MIN_SPEED)
 				return SolidLiquidBlock.SHAPES[pState.getValue(LEVEL)];
 		}

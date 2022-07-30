@@ -6,12 +6,16 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import javax.annotation.Nullable;
+
 import com.rcx.funkyfluids.blocks.OobleckBlock;
+import com.rcx.funkyfluids.blocks.SolidLiquidBlock;
 import com.rcx.funkyfluids.fluidtypes.FunkyFluidType;
 import com.rcx.funkyfluids.fluidtypes.FunkyFluidType.FunkyFluidInfo;
-import com.rcx.funkyfluids.util.ConsumingShapelessRecipe;
+import com.rcx.funkyfluids.fluidtypes.NormalPhysicsType;
 import com.rcx.funkyfluids.fluidtypes.OobleckType;
 import com.rcx.funkyfluids.items.FunkyFluidsBucketItem;
+import com.rcx.funkyfluids.util.ConsumingShapelessRecipe;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BucketItem;
@@ -49,14 +53,14 @@ public class FunkyFluidsResources {
 
 	public static List<FluidStuff> fluidList = new ArrayList<FluidStuff>();
 
-	public static FluidStuff addFluid(String localizedName, FunkyFluidInfo info, Material material, BiFunction<FluidType.Properties, FunkyFluidInfo, FluidType> type, BiFunction<Supplier<? extends FlowingFluid>, BlockBehaviour.Properties, LiquidBlock> block, Consumer<ForgeFlowingFluid.Properties> fluidProperties, FluidType.Properties prop) {
+	public static FluidStuff addFluid(String localizedName, FunkyFluidInfo info, Material material, BiFunction<FluidType.Properties, FunkyFluidInfo, FluidType> type, BiFunction<Supplier<? extends FlowingFluid>, BlockBehaviour.Properties, LiquidBlock> block, @Nullable Consumer<ForgeFlowingFluid.Properties> fluidProperties, FluidType.Properties prop) {
 		FluidStuff fluid = new FluidStuff(info.name, localizedName, info.color, type.apply(prop, info), block, fluidProperties, material);
 		fluidList.add(fluid);
 		return fluid;
 	}
 
 	public static final FluidStuff oobleck = addFluid("Oobleck", new FunkyFluidInfo("oobleck", 0xE8F3F4, 0.1F, 1.5F), Material.WATER, OobleckType::new, OobleckBlock::new,
-			prop -> prop.tickRate(20),
+			prop -> prop.explosionResistance(1000F).tickRate(20),
 			FluidType.Properties.create()
 			.canExtinguish(true)
 			.supportsBoating(true)
@@ -67,13 +71,25 @@ public class FunkyFluidsResources {
 			.motionScale(0.007D));
 
 	public static final FluidStuff melonade = addFluid("Melonade", new FunkyFluidInfo("melonade", 0xDF2121, -8.0F, 10.0F), Material.WATER, FunkyFluidType::new, LiquidBlock::new,
-			prop -> prop.tickRate(5),
+			prop -> prop.explosionResistance(1000F),
 			FluidType.Properties.create()
 			.canExtinguish(true)
 			.supportsBoating(true)
 			.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
 			.sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
 			.canHydrate(true));
+
+	public static final FluidStuff liquidCrystal = addFluid("Liquid Crystal", new FunkyFluidInfo("liquid_crystal", 0x926DD9, -8.0F, 10.0F), Material.AMETHYST, NormalPhysicsType::new, SolidLiquidBlock::new,
+			prop -> prop.explosionResistance(1000F).tickRate(30),
+			FluidType.Properties.create()
+			.canPushEntity(false)
+			.lightLevel(10)
+			.motionScale(0)
+			.canSwim(false)
+			.canDrown(false)
+			.viscosity(4000)
+			.sound(SoundActions.BUCKET_EMPTY, SoundEvents.AMETHYST_BLOCK_PLACE)
+			.sound(SoundActions.BUCKET_FILL, SoundEvents.AMETHYST_BLOCK_HIT));
 
 
 	public static void registerFluidInteractions() {
@@ -104,7 +120,7 @@ public class FunkyFluidsResources {
 		public final String localizedName;
 		public final int color;
 
-		public FluidStuff(String name, String localizedName, int color, FluidType type, BiFunction<Supplier<? extends FlowingFluid>, BlockBehaviour.Properties, LiquidBlock> block, Consumer<ForgeFlowingFluid.Properties> fluidProperties, Material material) {
+		public FluidStuff(String name, String localizedName, int color, FluidType type, BiFunction<Supplier<? extends FlowingFluid>, BlockBehaviour.Properties, LiquidBlock> block, @Nullable Consumer<ForgeFlowingFluid.Properties> fluidProperties, Material material) {
 			this.name = name;
 			this.localizedName = localizedName;
 			this.color = color;
@@ -114,12 +130,13 @@ public class FunkyFluidsResources {
 			TYPE = FLUIDTYPES.register(name, () -> type);
 
 			PROPERTIES = new ForgeFlowingFluid.Properties(TYPE, FLUID, FLUID_FLOW);
-			fluidProperties.accept(PROPERTIES);
+			if (fluidProperties != null)
+				fluidProperties.accept(PROPERTIES);
 
 			FLUID_BLOCK = BLOCKS.register(name + "_block", () -> block.apply(FLUID, Block.Properties.of(material).lightLevel((state) -> { return type.getLightLevel(); }).randomTicks().strength(100.0F).noLootTable()));
 			FLUID_BUCKET = ITEMS.register(name + "_bucket", () -> new FunkyFluidsBucketItem(FLUID, new BucketItem.Properties().craftRemainder(Items.BUCKET).stacksTo(1).tab(CreativeModeTab.TAB_MISC)));
 
-			PROPERTIES.bucket(FLUID_BUCKET).block(FLUID_BLOCK).explosionResistance(1000F).tickRate(9);
+			PROPERTIES.bucket(FLUID_BUCKET).block(FLUID_BLOCK);
 		}
 
 		public ForgeFlowingFluid.Properties getFluidProperties() {

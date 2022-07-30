@@ -25,6 +25,7 @@ public class FunkyFluidsLang extends LanguageProvider {
 		}
 		addLore(FunkyFluidsResources.oobleck.FLUID_BUCKET, "Non-Newtonian");
 		addLore(FunkyFluidsResources.melonade.FLUID_BUCKET, "When life gives you melons...");
+		addLore(FunkyFluidsResources.liquidCrystal.FLUID_BUCKET, "Solid Stuff");
 	}
 
 	public void addFluid(String name, String localizedName) {

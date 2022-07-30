@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -40,6 +41,9 @@ public class SolidLiquidBlock extends LiquidBlock {
 
 	@Override
 	public VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-		return SHAPES[pState.getValue(LEVEL)];
+		if (pContext instanceof EntityCollisionContext && ((EntityCollisionContext) pContext).getEntity() != null) {
+			return SolidLiquidBlock.SHAPES[pState.getValue(LEVEL)];
+		}
+		return Shapes.empty();
 	}
 }

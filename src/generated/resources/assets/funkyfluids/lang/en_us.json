@@ -1,8 +1,12 @@
 {
+  "block.funkyfluids.liquid_crystal_block": "Liquid Crystal",
   "block.funkyfluids.melonade_block": "Melonade",
   "block.funkyfluids.oobleck_block": "Oobleck",
+  "fluid.funkyfluids.liquid_crystal": "Liquid Crystal",
   "fluid.funkyfluids.melonade": "Melonade",
   "fluid.funkyfluids.oobleck": "Oobleck",
+  "item.funkyfluids.liquid_crystal_bucket": "Liquid Crystal Bucket",
+  "item.funkyfluids.liquid_crystal_bucket.lore": "Solid Stuff",
   "item.funkyfluids.melonade_bucket": "Melonade Bucket",
   "item.funkyfluids.melonade_bucket.lore": "When life gives you melons...",
   "item.funkyfluids.oobleck_bucket": "Oobleck Bucket",

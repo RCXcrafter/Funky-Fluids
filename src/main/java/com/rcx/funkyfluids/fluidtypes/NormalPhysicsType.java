@@ -3,19 +3,14 @@ package com.rcx.funkyfluids.fluidtypes;
 import com.rcx.funkyfluids.util.FunkyFluidsUtil;
 
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 
-public class AirPhysicsType extends FunkyFluidType {
+public class NormalPhysicsType extends FunkyFluidType {
 
-	public AirPhysicsType(Properties properties, FunkyFluidInfo info) {
+	public NormalPhysicsType(Properties properties, FunkyFluidInfo info) {
 		super(properties, info);
-	}
-
-	public boolean canSwim(Entity entity) {
-		return false;
 	}
 
 	public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {

@@ -25,7 +25,7 @@ public class FunkyFluidsRecipes extends RecipeProvider implements IConditionBuil
 		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.oobleck.FLUID_BUCKET.get())
 		.requires(Items.POTATO)
 		.requires(Items.POTATO)
-		.requires(Items.WATER_BUCKET, 1)
+		.requires(Items.WATER_BUCKET)
 		.unlockedBy("has_item", has(Items.WATER_BUCKET))
 		.save(ConsumerWrapperBuilder.wrap(FunkyFluidsResources.consumingShapeless.get()).build(consumer), getResource("oobleck_bucket"));
 
@@ -35,6 +35,13 @@ public class FunkyFluidsRecipes extends RecipeProvider implements IConditionBuil
 		.requires(Items.BUCKET)
 		.unlockedBy("has_item", has(Items.BUCKET))
 		.save(consumer, getResource("melonade_bucket"));
+
+		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.liquidCrystal.FLUID_BUCKET.get())
+		.requires(Items.AMETHYST_SHARD)
+		.requires(Items.AMETHYST_SHARD)
+		.requires(Items.LAVA_BUCKET)
+		.unlockedBy("has_item", has(Items.LAVA_BUCKET))
+		.save(ConsumerWrapperBuilder.wrap(FunkyFluidsResources.consumingShapeless.get()).build(consumer), getResource("liquid_crystal_bucket"));
 	}
 
 	public ResourceLocation getResource(String name) {
