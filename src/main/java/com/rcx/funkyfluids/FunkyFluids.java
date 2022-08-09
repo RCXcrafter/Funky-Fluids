@@ -8,9 +8,11 @@ import com.rcx.funkyfluids.datagen.FunkyFluidsItemTags;
 import com.rcx.funkyfluids.datagen.FunkyFluidsLang;
 import com.rcx.funkyfluids.datagen.FunkyFluidsLootTables;
 import com.rcx.funkyfluids.datagen.FunkyFluidsRecipes;
+import com.rcx.funkyfluids.entities.FallingSillyPuttyRenderer;
 
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -41,6 +43,7 @@ public class FunkyFluids {
 		FunkyFluidsResources.ITEMS.register(modEventBus);
 		FunkyFluidsResources.FLUIDTYPES.register(modEventBus);
 		FunkyFluidsResources.FLUIDS.register(modEventBus);
+		FunkyFluidsResources.ENTITY_TYPES.register(modEventBus);
 
 		//MinecraftForge.EVENT_BUS.register(this);
 	}
@@ -74,10 +77,13 @@ public class FunkyFluids {
 
 		@SubscribeEvent
 		public static void onClientSetup(FMLClientSetupEvent event) {
-			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.melonade.FLUID.get(), RenderType.translucent());
-			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.melonade.FLUID_FLOW.get(), RenderType.translucent());
-			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.liquidCrystal.FLUID.get(), RenderType.translucent());
-			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.liquidCrystal.FLUID_FLOW.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.MELONADE.FLUID.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.MELONADE.FLUID_FLOW.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.LIQUID_CRYSTAL.FLUID.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.LIQUID_CRYSTAL.FLUID_FLOW.get(), RenderType.translucent());
+
+			EntityRenderers.register(FunkyFluidsResources.FALLING_SILLY_PUTTY.get(), FallingSillyPuttyRenderer::new);
+
 			//MinecraftForge.EVENT_BUS.addListener(ClientModEvents::handleClientJump);
 		}
 

@@ -22,26 +22,33 @@ public class FunkyFluidsRecipes extends RecipeProvider implements IConditionBuil
 
 	@Override
 	public void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.oobleck.FLUID_BUCKET.get())
+		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.OOBLECK.FLUID_BUCKET.get())
 		.requires(Items.POTATO)
 		.requires(Items.POTATO)
 		.requires(Items.WATER_BUCKET)
 		.unlockedBy("has_item", has(Items.WATER_BUCKET))
-		.save(ConsumerWrapperBuilder.wrap(FunkyFluidsResources.consumingShapeless.get()).build(consumer), getResource("oobleck_bucket"));
+		.save(ConsumerWrapperBuilder.wrap(FunkyFluidsResources.CONSUMING_SHAPELESS.get()).build(consumer), getResource("oobleck_bucket"));
 
-		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.melonade.FLUID_BUCKET.get())
+		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.MELONADE.FLUID_BUCKET.get())
 		.requires(Items.MELON_SLICE)
 		.requires(Items.MELON_SLICE)
 		.requires(Items.BUCKET)
 		.unlockedBy("has_item", has(Items.BUCKET))
 		.save(consumer, getResource("melonade_bucket"));
 
-		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.liquidCrystal.FLUID_BUCKET.get())
+		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.LIQUID_CRYSTAL.FLUID_BUCKET.get())
 		.requires(Items.AMETHYST_SHARD)
 		.requires(Items.AMETHYST_SHARD)
 		.requires(Items.LAVA_BUCKET)
 		.unlockedBy("has_item", has(Items.LAVA_BUCKET))
-		.save(ConsumerWrapperBuilder.wrap(FunkyFluidsResources.consumingShapeless.get()).build(consumer), getResource("liquid_crystal_bucket"));
+		.save(ConsumerWrapperBuilder.wrap(FunkyFluidsResources.CONSUMING_SHAPELESS.get()).build(consumer), getResource("liquid_crystal_bucket"));
+
+		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.SILLY_PUTTY.FLUID_BUCKET.get())
+		.requires(Items.SLIME_BALL)
+		.requires(Items.PHANTOM_MEMBRANE)
+		.requires(Items.BUCKET)
+		.unlockedBy("has_item", has(Items.BUCKET))
+		.save(consumer, getResource("silly_putty_bucket"));
 	}
 
 	public ResourceLocation getResource(String name) {
