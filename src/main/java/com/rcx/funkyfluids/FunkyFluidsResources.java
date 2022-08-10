@@ -116,7 +116,7 @@ public class FunkyFluidsResources {
 			.sound(SoundActions.BUCKET_EMPTY, SoundEvents.SLIME_BLOCK_PLACE)
 			.sound(SoundActions.BUCKET_FILL, SoundEvents.SLIME_BLOCK_BREAK)
 			.viscosity(8000)
-			.motionScale(0.0005D));
+			.motionScale(0.0001D));
 
 
 	public static <T extends Entity> RegistryObject<EntityType<T>> register(String name, Builder<T> builder) {

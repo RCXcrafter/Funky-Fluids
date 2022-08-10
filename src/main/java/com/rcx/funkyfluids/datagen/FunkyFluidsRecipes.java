@@ -32,6 +32,7 @@ public class FunkyFluidsRecipes extends RecipeProvider implements IConditionBuil
 		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.MELONADE.FLUID_BUCKET.get())
 		.requires(Items.MELON_SLICE)
 		.requires(Items.MELON_SLICE)
+		.requires(Items.SUGAR)
 		.requires(Items.BUCKET)
 		.unlockedBy("has_item", has(Items.BUCKET))
 		.save(consumer, getResource("melonade_bucket"));
