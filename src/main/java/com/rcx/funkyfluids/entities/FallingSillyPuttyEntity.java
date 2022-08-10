@@ -3,6 +3,7 @@ package com.rcx.funkyfluids.entities;
 import com.rcx.funkyfluids.FunkyFluidsResources;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
@@ -52,7 +53,7 @@ public class FallingSillyPuttyEntity extends FallingBlockEntity {
 			fallDistance = 0f;
 			hasImpulse = true;
 			setOnGround(false);
-			playSound(this.getBlockState().getSoundType().getStepSound(), 1.0f, 1.0f);
+			playSound(SoundEvents.SLIME_BLOCK_STEP, 1.0f, 1.0f);
 		}
 		return super.causeFallDamage(pFallDistance, pMultiplier, pSource);
 	}

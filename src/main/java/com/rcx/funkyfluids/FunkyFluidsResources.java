@@ -113,10 +113,10 @@ public class FunkyFluidsResources {
 			prop -> prop.explosionResistance(1000F).tickRate(70).slopeFindDistance(1).levelDecreasePerBlock(4),
 			FluidType.Properties.create()
 			.supportsBoating(true)
-			.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
-			.sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA)
+			.sound(SoundActions.BUCKET_EMPTY, SoundEvents.SLIME_BLOCK_PLACE)
+			.sound(SoundActions.BUCKET_FILL, SoundEvents.SLIME_BLOCK_BREAK)
 			.viscosity(8000)
-			.motionScale(0.00005D));
+			.motionScale(0.0005D));
 
 
 	public static <T extends Entity> RegistryObject<EntityType<T>> register(String name, Builder<T> builder) {

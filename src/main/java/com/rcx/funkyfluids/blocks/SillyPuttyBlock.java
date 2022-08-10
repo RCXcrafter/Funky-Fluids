@@ -9,6 +9,7 @@ import com.rcx.funkyfluids.fluidtypes.SillyPuttyType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -179,7 +180,7 @@ public class SillyPuttyBlock extends LiquidBlock implements Fallable {
 						entityIn.setDeltaMovement(new Vec3(velocity * Math.signum(direction.x()), motion.y(), motion.z()));
 						entityIn.hurtMarked = true;
 						if (velocity > 0.1) {
-							worldIn.playSound(null, pos, getSoundType(state, worldIn, pos, entityIn).getStepSound(), SoundSource.BLOCKS, 1.0f, 1.0f);
+							worldIn.playSound(null, pos, SoundEvents.SLIME_BLOCK_STEP, SoundSource.BLOCKS, 1.0f, 1.0f);
 						}
 					}
 				} else {
@@ -187,7 +188,7 @@ public class SillyPuttyBlock extends LiquidBlock implements Fallable {
 						entityIn.setDeltaMovement(new Vec3(motion.x(), motion.y(), velocity * Math.signum(direction.z())));
 						entityIn.hurtMarked = true;
 						if (velocity > 0.1) {
-							worldIn.playSound(null, pos, getSoundType(state, worldIn, pos, entityIn).getStepSound(), SoundSource.BLOCKS, 1.0f, 1.0f);
+							worldIn.playSound(null, pos, SoundEvents.SLIME_BLOCK_STEP, SoundSource.BLOCKS, 1.0f, 1.0f);
 						}
 					}
 				}
