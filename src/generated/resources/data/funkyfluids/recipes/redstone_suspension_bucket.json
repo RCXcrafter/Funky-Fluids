@@ -1,0 +1,17 @@
+{
+  "type": "funkyfluids:crafting_shapeless_consuming",
+  "ingredients": [
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    }
+  ],
+  "result": {
+    "item": "funkyfluids:redstone_suspension_bucket"
+  }
+}

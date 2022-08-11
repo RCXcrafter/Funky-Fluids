@@ -10,6 +10,7 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import com.rcx.funkyfluids.blocks.OobleckBlock;
+import com.rcx.funkyfluids.blocks.RedstoneSuspensionBlock;
 import com.rcx.funkyfluids.blocks.SillyPuttyBlock;
 import com.rcx.funkyfluids.blocks.SolidLiquidBlock;
 import com.rcx.funkyfluids.entities.FallingSillyPuttyEntity;
@@ -87,7 +88,7 @@ public class FunkyFluidsResources {
 			.viscosity(3000)
 			.motionScale(0.007D));
 
-	public static final FluidStuff MELONADE = addFluid("Melonade", new FunkyFluidInfo("melonade", 0xDF2121, -8.0F, 10.0F), FunkyFluidsMaterials.MELONADE_MATERIAL, FunkyFluidType::new, LiquidBlock::new,
+	public static final FluidStuff MELONADE = addFluid("Melonade", new FunkyFluidInfo("melonade", 0xDF2121, -8.0F, 10.0F), FunkyFluidsMaterials.RED_FLUID_MATERIAL, FunkyFluidType::new, LiquidBlock::new,
 			prop -> prop.explosionResistance(1000F),
 			FluidType.Properties.create()
 			.canExtinguish(true)
@@ -118,6 +119,15 @@ public class FunkyFluidsResources {
 			.viscosity(8000)
 			.motionScale(0.0001D));
 
+	public static final FluidStuff REDSTONE_SUSPENSION = addFluid("Redstone Suspension", new FunkyFluidInfo("redstone_suspension", 0xAA0F01, -28.0F, 40.0F), FunkyFluidsMaterials.RED_FLUID_MATERIAL, FunkyFluidType::new, RedstoneSuspensionBlock::new,
+			prop -> prop.explosionResistance(1000F),
+			FluidType.Properties.create()
+			.canExtinguish(true)
+			.supportsBoating(true)
+			.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
+			.sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+			.canHydrate(true));
+
 
 	public static <T extends Entity> RegistryObject<EntityType<T>> register(String name, Builder<T> builder) {
 		return ENTITY_TYPES.register(name, () -> builder.build(FunkyFluids.MODID + ":" + name));
@@ -134,6 +144,10 @@ public class FunkyFluidsResources {
 				));
 		FluidInteractionRegistry.addInteraction(ForgeMod.LAVA_TYPE.get(), new InteractionInformation(
 				MELONADE.TYPE.get(),
+				fluidState -> fluidState.isSource() ? Blocks.OBSIDIAN.defaultBlockState() : Blocks.COBBLESTONE.defaultBlockState()
+				));
+		FluidInteractionRegistry.addInteraction(ForgeMod.LAVA_TYPE.get(), new InteractionInformation(
+				REDSTONE_SUSPENSION.TYPE.get(),
 				fluidState -> fluidState.isSource() ? Blocks.OBSIDIAN.defaultBlockState() : Blocks.COBBLESTONE.defaultBlockState()
 				));
 	}

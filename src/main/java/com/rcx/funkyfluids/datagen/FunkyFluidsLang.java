@@ -27,6 +27,7 @@ public class FunkyFluidsLang extends LanguageProvider {
 		addLore(FunkyFluidsResources.MELONADE.FLUID_BUCKET, "When life gives you melons...");
 		addLore(FunkyFluidsResources.LIQUID_CRYSTAL.FLUID_BUCKET, "Solid Stuff");
 		addLore(FunkyFluidsResources.SILLY_PUTTY.FLUID_BUCKET, "A particularly nonsensical kind of putty");
+		addLore(FunkyFluidsResources.REDSTONE_SUSPENSION.FLUID_BUCKET, "Emits redstone signals");
 	}
 
 	public void addFluid(String name, String localizedName) {

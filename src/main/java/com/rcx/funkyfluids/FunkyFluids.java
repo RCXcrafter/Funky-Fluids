@@ -81,6 +81,8 @@ public class FunkyFluids {
 			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.MELONADE.FLUID_FLOW.get(), RenderType.translucent());
 			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.LIQUID_CRYSTAL.FLUID.get(), RenderType.translucent());
 			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.LIQUID_CRYSTAL.FLUID_FLOW.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.REDSTONE_SUSPENSION.FLUID.get(), RenderType.translucent());
+			ItemBlockRenderTypes.setRenderLayer(FunkyFluidsResources.REDSTONE_SUSPENSION.FLUID_FLOW.get(), RenderType.translucent());
 
 			EntityRenderers.register(FunkyFluidsResources.FALLING_SILLY_PUTTY.get(), FallingSillyPuttyRenderer::new);
 

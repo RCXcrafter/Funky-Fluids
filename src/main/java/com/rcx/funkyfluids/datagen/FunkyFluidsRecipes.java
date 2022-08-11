@@ -50,6 +50,13 @@ public class FunkyFluidsRecipes extends RecipeProvider implements IConditionBuil
 		.requires(Items.BUCKET)
 		.unlockedBy("has_item", has(Items.BUCKET))
 		.save(consumer, getResource("silly_putty_bucket"));
+
+		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.REDSTONE_SUSPENSION.FLUID_BUCKET.get())
+		.requires(Items.REDSTONE)
+		.requires(Items.REDSTONE)
+		.requires(Items.WATER_BUCKET)
+		.unlockedBy("has_item", has(Items.WATER_BUCKET))
+		.save(ConsumerWrapperBuilder.wrap(FunkyFluidsResources.CONSUMING_SHAPELESS.get()).build(consumer), getResource("redstone_suspension_bucket"));
 	}
 
 	public ResourceLocation getResource(String name) {

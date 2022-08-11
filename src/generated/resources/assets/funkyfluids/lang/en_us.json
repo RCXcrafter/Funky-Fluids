@@ -2,10 +2,12 @@
   "block.funkyfluids.liquid_crystal_block": "Liquid Crystal",
   "block.funkyfluids.melonade_block": "Melonade",
   "block.funkyfluids.oobleck_block": "Oobleck",
+  "block.funkyfluids.redstone_suspension_block": "Redstone Suspension",
   "block.funkyfluids.silly_putty_block": "Silly Putty",
   "fluid.funkyfluids.liquid_crystal": "Liquid Crystal",
   "fluid.funkyfluids.melonade": "Melonade",
   "fluid.funkyfluids.oobleck": "Oobleck",
+  "fluid.funkyfluids.redstone_suspension": "Redstone Suspension",
   "fluid.funkyfluids.silly_putty": "Silly Putty",
   "item.funkyfluids.liquid_crystal_bucket": "Liquid Crystal Bucket",
   "item.funkyfluids.liquid_crystal_bucket.lore": "Solid Stuff",
@@ -13,6 +15,8 @@
   "item.funkyfluids.melonade_bucket.lore": "When life gives you melons...",
   "item.funkyfluids.oobleck_bucket": "Oobleck Bucket",
   "item.funkyfluids.oobleck_bucket.lore": "Non-Newtonian",
+  "item.funkyfluids.redstone_suspension_bucket": "Redstone Suspension Bucket",
+  "item.funkyfluids.redstone_suspension_bucket.lore": "Emits redstone signals",
   "item.funkyfluids.silly_putty_bucket": "Silly Putty Bucket",
   "item.funkyfluids.silly_putty_bucket.lore": "A particularly nonsensical kind of putty"
 }
