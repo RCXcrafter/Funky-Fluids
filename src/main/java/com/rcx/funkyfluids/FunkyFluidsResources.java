@@ -13,6 +13,7 @@ import com.rcx.funkyfluids.blocks.OobleckBlock;
 import com.rcx.funkyfluids.blocks.RedstoneSuspensionBlock;
 import com.rcx.funkyfluids.blocks.SillyPuttyBlock;
 import com.rcx.funkyfluids.blocks.SolidLiquidBlock;
+import com.rcx.funkyfluids.datagen.FunkyFluidsFluidTags;
 import com.rcx.funkyfluids.entities.FallingSillyPuttyEntity;
 import com.rcx.funkyfluids.fluids.FlowingSillyPutty;
 import com.rcx.funkyfluids.fluidtypes.FunkyFluidType;
@@ -137,17 +138,8 @@ public class FunkyFluidsResources {
 
 
 	public static void registerFluidInteractions() {
-		//oobleck interacts with lava just like water does because it's mostly water
 		FluidInteractionRegistry.addInteraction(ForgeMod.LAVA_TYPE.get(), new InteractionInformation(
-				OOBLECK.TYPE.get(),
-				fluidState -> fluidState.isSource() ? Blocks.OBSIDIAN.defaultBlockState() : Blocks.COBBLESTONE.defaultBlockState()
-				));
-		FluidInteractionRegistry.addInteraction(ForgeMod.LAVA_TYPE.get(), new InteractionInformation(
-				MELONADE.TYPE.get(),
-				fluidState -> fluidState.isSource() ? Blocks.OBSIDIAN.defaultBlockState() : Blocks.COBBLESTONE.defaultBlockState()
-				));
-		FluidInteractionRegistry.addInteraction(ForgeMod.LAVA_TYPE.get(), new InteractionInformation(
-				REDSTONE_SUSPENSION.TYPE.get(),
+				(level, currentPos, relativePos, currentState) -> level.getFluidState(relativePos).is(FunkyFluidsFluidTags.WATERY),
 				fluidState -> fluidState.isSource() ? Blocks.OBSIDIAN.defaultBlockState() : Blocks.COBBLESTONE.defaultBlockState()
 				));
 	}
