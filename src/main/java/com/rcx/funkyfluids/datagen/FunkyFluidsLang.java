@@ -32,6 +32,7 @@ public class FunkyFluidsLang extends LanguageProvider {
 
 	public void addFluid(String name, String localizedName) {
 		add("fluid." + FunkyFluids.MODID + "." + name, localizedName);
+		add("fluid_type." + FunkyFluids.MODID + "." + name, localizedName);
 	}
 
 	public void addLore(Supplier<? extends Item> key, String lore) {

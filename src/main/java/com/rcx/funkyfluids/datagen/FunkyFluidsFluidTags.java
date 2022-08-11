@@ -23,6 +23,7 @@ public class FunkyFluidsFluidTags extends FluidTagsProvider {
 	@Override
 	public void addTags() {
 		this.tag(WATERY)
+		//.addTag(FluidTags.WATER)
 		.add(FunkyFluidsResources.OOBLECK.FLUID.get())
 		.add(FunkyFluidsResources.OOBLECK.FLUID_FLOW.get())
 		.add(FunkyFluidsResources.MELONADE.FLUID.get())
