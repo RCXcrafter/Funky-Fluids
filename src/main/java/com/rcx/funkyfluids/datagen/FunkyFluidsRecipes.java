@@ -57,6 +57,14 @@ public class FunkyFluidsRecipes extends RecipeProvider implements IConditionBuil
 		.requires(Items.WATER_BUCKET)
 		.unlockedBy("has_item", has(Items.WATER_BUCKET))
 		.save(ConsumerWrapperBuilder.wrap(FunkyFluidsResources.CONSUMING_SHAPELESS.get()).build(consumer), getResource("redstone_suspension_bucket"));
+
+		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.MAGNETROLEUM.FLUID_BUCKET.get())
+		.requires(Items.REDSTONE)
+		.requires(Items.IRON_INGOT)
+		.requires(Items.LAPIS_LAZULI)
+		.requires(Items.LAVA_BUCKET)
+		.unlockedBy("has_item", has(Items.LAVA_BUCKET))
+		.save(ConsumerWrapperBuilder.wrap(FunkyFluidsResources.CONSUMING_SHAPELESS.get()).build(consumer), getResource("magnetroleum_bucket"));
 	}
 
 	public ResourceLocation getResource(String name) {

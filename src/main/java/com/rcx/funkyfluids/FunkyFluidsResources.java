@@ -15,9 +15,11 @@ import com.rcx.funkyfluids.blocks.SillyPuttyBlock;
 import com.rcx.funkyfluids.blocks.SolidLiquidBlock;
 import com.rcx.funkyfluids.datagen.FunkyFluidsFluidTags;
 import com.rcx.funkyfluids.entities.FallingSillyPuttyEntity;
+import com.rcx.funkyfluids.fluids.FlowingMagnetroleum;
 import com.rcx.funkyfluids.fluids.FlowingSillyPutty;
 import com.rcx.funkyfluids.fluidtypes.FunkyFluidType;
 import com.rcx.funkyfluids.fluidtypes.FunkyFluidType.FunkyFluidInfo;
+import com.rcx.funkyfluids.fluidtypes.LowFrictionType;
 import com.rcx.funkyfluids.fluidtypes.NormalPhysicsType;
 import com.rcx.funkyfluids.fluidtypes.OobleckType;
 import com.rcx.funkyfluids.fluidtypes.SillyPuttyType;
@@ -73,9 +75,7 @@ public class FunkyFluidsResources {
 	}
 
 	public static FluidStuff addFluid(String localizedName, FunkyFluidInfo info, Material material, BiFunction<FluidType.Properties, FunkyFluidInfo, FluidType> type, BiFunction<Supplier<? extends FlowingFluid>, BlockBehaviour.Properties, LiquidBlock> block, @Nullable Consumer<ForgeFlowingFluid.Properties> fluidProperties, FluidType.Properties prop) {
-		FluidStuff fluid = new FluidStuff(info.name, localizedName, info.color, type.apply(prop, info), block, fluidProperties, ForgeFlowingFluid.Source::new, ForgeFlowingFluid.Flowing::new, material);
-		fluidList.add(fluid);
-		return fluid;
+		return addFluid(localizedName, info, material, type, block, ForgeFlowingFluid.Source::new, ForgeFlowingFluid.Flowing::new, fluidProperties, prop);
 	}
 
 	public static final FluidStuff OOBLECK = addFluid("Oobleck", new FunkyFluidInfo("oobleck", 0xE8F3F4, 0.1F, 1.5F), FunkyFluidsMaterials.OOBLECK_MATERIAL, OobleckType::new, OobleckBlock::new,
@@ -128,6 +128,15 @@ public class FunkyFluidsResources {
 			.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
 			.sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
 			.canHydrate(true));
+
+	public static final FluidStuff MAGNETROLEUM = addFluid("Magnetroleum", new FunkyFluidInfo("magnetroleum", 0x8B3BAD, -28.0F, 10.0F), FunkyFluidsMaterials.PURPLE_FLUID_MATERIAL, LowFrictionType::new, LiquidBlock::new, ForgeFlowingFluid.Source::new, FlowingMagnetroleum::new,
+			prop -> prop.explosionResistance(1000F).tickRate(30).levelDecreasePerBlock(2),
+			FluidType.Properties.create()
+			.supportsBoating(true)
+			.temperature(340)
+			.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
+			.sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA)
+			.motionScale(-0.04D));
 
 
 	public static <T extends Entity> RegistryObject<EntityType<T>> register(String name, Builder<T> builder) {

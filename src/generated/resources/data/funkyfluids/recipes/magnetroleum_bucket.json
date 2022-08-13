@@ -1,0 +1,20 @@
+{
+  "type": "funkyfluids:crafting_shapeless_consuming",
+  "ingredients": [
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    }
+  ],
+  "result": {
+    "item": "funkyfluids:magnetroleum_bucket"
+  }
+}
