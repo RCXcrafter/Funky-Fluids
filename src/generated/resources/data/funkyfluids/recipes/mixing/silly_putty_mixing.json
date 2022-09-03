@@ -1,0 +1,17 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:slimeballs"
+    },
+    {
+      "item": "minecraft:phantom_membrane"
+    }
+  ],
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "funkyfluids:silly_putty"
+    }
+  ]
+}

@@ -2,10 +2,10 @@
   "type": "funkyfluids:crafting_shapeless_consuming",
   "ingredients": [
     {
-      "item": "minecraft:redstone"
+      "tag": "forge:dusts/redstone"
     },
     {
-      "item": "minecraft:redstone"
+      "tag": "forge:dusts/redstone"
     },
     {
       "item": "minecraft:water_bucket"

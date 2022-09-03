@@ -1,5 +1,5 @@
 {
-  "type": "funkyfluids:crafting_shapeless_consuming",
+  "type": "create:mixing",
   "ingredients": [
     {
       "tag": "forge:dusts/redstone"
@@ -11,10 +11,14 @@
       "tag": "forge:gems/lapis"
     },
     {
-      "item": "minecraft:lava_bucket"
+      "amount": 1000,
+      "fluidTag": "minecraft:lava"
     }
   ],
-  "result": {
-    "item": "funkyfluids:magnetroleum_bucket"
-  }
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "funkyfluids:magnetroleum"
+    }
+  ]
 }

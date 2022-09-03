@@ -2,10 +2,10 @@
   "type": "funkyfluids:crafting_shapeless_consuming",
   "ingredients": [
     {
-      "item": "minecraft:amethyst_shard"
+      "tag": "forge:gems/amethyst"
     },
     {
-      "item": "minecraft:amethyst_shard"
+      "tag": "forge:gems/amethyst"
     },
     {
       "item": "minecraft:lava_bucket"

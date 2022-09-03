@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:crops/potato"
+    },
+    {
+      "tag": "forge:crops/potato"
+    },
+    {
+      "amount": 1000,
+      "fluidTag": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "funkyfluids:oobleck"
+    }
+  ]
+}

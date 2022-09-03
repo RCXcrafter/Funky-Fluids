@@ -36,6 +36,8 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
+			property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
@@ -61,6 +63,8 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
+			property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             property 'forge.logging.markers', 'REGISTRIES'
 
@@ -80,6 +84,8 @@ minecraft {
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
             workingDirectory project.file('run')
+			property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             property 'forge.logging.markers', 'REGISTRIES'
 
@@ -96,6 +102,8 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
+			property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             property 'forge.logging.markers', 'REGISTRIES'
 
@@ -124,6 +132,14 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
+	maven {
+        name 'tterrag maven'
+        url 'https://maven.tterrag.com'
+    }
+	maven {
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
 }
 
 dependencies {
@@ -139,6 +155,14 @@ dependencies {
 
     // Examples using mod jars from ./libs
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
+	
+	implementation fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:all") { transitive = false }
+    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
+    compileOnly fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+	
+	runtimeOnly fg.deobf("mezz.jei:jei-1.19.2-forge:11.2.0.254")
+	
+	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

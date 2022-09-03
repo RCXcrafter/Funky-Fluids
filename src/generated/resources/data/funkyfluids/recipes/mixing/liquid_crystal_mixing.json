@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:gems/amethyst"
+    },
+    {
+      "tag": "forge:gems/amethyst"
+    },
+    {
+      "amount": 1000,
+      "fluidTag": "minecraft:lava"
+    }
+  ],
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "funkyfluids:liquid_crystal"
+    }
+  ]
+}

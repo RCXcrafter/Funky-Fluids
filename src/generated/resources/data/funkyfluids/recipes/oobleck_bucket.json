@@ -2,10 +2,10 @@
   "type": "funkyfluids:crafting_shapeless_consuming",
   "ingredients": [
     {
-      "item": "minecraft:potato"
+      "tag": "forge:crops/potato"
     },
     {
-      "item": "minecraft:potato"
+      "tag": "forge:crops/potato"
     },
     {
       "item": "minecraft:water_bucket"
