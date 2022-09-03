@@ -6,9 +6,9 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class FunkyFluidsMaterials {
 
-	public static final Material OOBLECK_MATERIAL = new FunkyFluidsMaterials.Builder(MaterialColor.WOOL).notSolidBlocking().nonSolid().destroyOnPush().replaceable().liquid().build();
+	public static final Material OOBLECK_MATERIAL = new FunkyFluidsMaterials.Builder(MaterialColor.WOOL).noCollider().notSolidBlocking().nonSolid().destroyOnPush().replaceable().liquid().build();
 	public static final Material RED_FLUID_MATERIAL = new FunkyFluidsMaterials.Builder(MaterialColor.COLOR_RED).noCollider().notSolidBlocking().nonSolid().destroyOnPush().replaceable().liquid().build();
-	public static final Material LIQUID_CRYSTAL_MATERIAL = new FunkyFluidsMaterials.Builder(MaterialColor.COLOR_PURPLE).notPushable().liquid().build();
+	public static final Material LIQUID_CRYSTAL_MATERIAL = new FunkyFluidsMaterials.Builder(MaterialColor.COLOR_PURPLE).noCollider().notPushable().liquid().build();
 	public static final Material SILLY_PUTTY_MATERIAL = new FunkyFluidsMaterials.Builder(MaterialColor.COLOR_MAGENTA).notSolidBlocking().nonSolid().destroyOnPush().replaceable().liquid().build();
 	public static final Material PURPLE_FLUID_MATERIAL = new FunkyFluidsMaterials.Builder(MaterialColor.COLOR_PURPLE).noCollider().notSolidBlocking().nonSolid().destroyOnPush().replaceable().liquid().build();
 
