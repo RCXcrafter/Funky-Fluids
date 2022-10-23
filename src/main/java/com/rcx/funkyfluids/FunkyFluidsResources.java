@@ -27,6 +27,10 @@ import com.rcx.funkyfluids.items.FunkyFluidsBucketItem;
 import com.rcx.funkyfluids.util.ConsumingShapelessRecipe;
 import com.rcx.funkyfluids.util.FunkyFluidsMaterials;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockSource;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -34,11 +38,15 @@ import net.minecraft.world.entity.EntityType.Builder;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DispensibleContainerItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.FlowingFluid;
@@ -50,6 +58,7 @@ import net.minecraftforge.fluids.FluidInteractionRegistry;
 import net.minecraftforge.fluids.FluidInteractionRegistry.InteractionInformation;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -151,6 +160,30 @@ public class FunkyFluidsResources {
 				(level, currentPos, relativePos, currentState) -> level.getFluidState(relativePos).is(FunkyFluidsFluidTags.WATERY),
 				fluidState -> fluidState.isSource() ? Blocks.OBSIDIAN.defaultBlockState() : Blocks.COBBLESTONE.defaultBlockState()
 				));
+	}
+
+	public static void registerDispenserBehaviour(final FMLCommonSetupEvent event) {
+		DispenseItemBehavior dispenseBucket = new DefaultDispenseItemBehavior() {
+			private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
+
+			@Override
+			public ItemStack execute(BlockSource source, ItemStack stack) {
+				DispensibleContainerItem container = (DispensibleContainerItem)stack.getItem();
+				BlockPos blockpos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
+				Level level = source.getLevel();
+				if (container.emptyContents(null, level, blockpos, null)) {
+					container.checkExtraContent(null, level, stack, blockpos);
+					return new ItemStack(Items.BUCKET);
+				} else {
+					return this.defaultDispenseItemBehavior.dispense(source, stack);
+				}
+			}
+		};
+		event.enqueueWork(() -> {
+			for (FluidStuff fluid : fluidList) {
+				DispenserBlock.registerBehavior(fluid.FLUID_BUCKET.get(), dispenseBucket);
+			}
+		});
 	}
 
 	public static class FluidStuff {

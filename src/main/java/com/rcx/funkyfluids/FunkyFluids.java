@@ -51,6 +51,7 @@ public class FunkyFluids {
 	public void commonSetup(final FMLCommonSetupEvent event) {
 		//FunkyFluidsPacketHandler.init();
 		FunkyFluidsResources.registerFluidInteractions();
+		FunkyFluidsResources.registerDispenserBehaviour(event);
 	}
 
 	public void gatherData(GatherDataEvent event) {
