@@ -2,6 +2,7 @@ package com.rcx.funkyfluids.datagen;
 
 import com.rcx.funkyfluids.FunkyFluids;
 import com.rcx.funkyfluids.FunkyFluidsResources;
+import com.rcx.funkyfluids.FunkyFluidsResources.FluidStuff;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.FluidTagsProvider;
@@ -22,7 +23,10 @@ public class FunkyFluidsFluidTags extends FluidTagsProvider {
 
 	@Override
 	public void addTags() {
-		this.tag(WATERY)
+		for (FluidStuff fluid : FunkyFluidsResources.fluidList) {
+			tag(FluidTags.create(new ResourceLocation(FunkyFluids.MODID, fluid.name))).add(fluid.FLUID.get()).add(fluid.FLUID_FLOW.get());
+		}
+		tag(WATERY)
 		//.addTag(FluidTags.WATER)
 		.add(FunkyFluidsResources.OOBLECK.FLUID.get())
 		.add(FunkyFluidsResources.OOBLECK.FLUID_FLOW.get())
