@@ -5,7 +5,7 @@ import com.rcx.funkyfluids.FunkyFluids;
 import com.rcx.funkyfluids.FunkyFluidsResources;
 import com.rcx.funkyfluids.FunkyFluidsResources.FluidStuff;
 
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
@@ -17,7 +17,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class FunkyFluidsItemModels extends ItemModelProvider {
 
-	public FunkyFluidsItemModels(DataGenerator generator, ExistingFileHelper existingFileHelper) {
+	public FunkyFluidsItemModels(PackOutput generator, ExistingFileHelper existingFileHelper) {
 		super(generator, FunkyFluids.MODID, existingFileHelper);
 	}
 

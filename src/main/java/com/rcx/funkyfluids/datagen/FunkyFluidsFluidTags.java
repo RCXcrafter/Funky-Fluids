@@ -1,10 +1,13 @@
 package com.rcx.funkyfluids.datagen;
 
+import java.util.concurrent.CompletableFuture;
+
 import com.rcx.funkyfluids.FunkyFluids;
 import com.rcx.funkyfluids.FunkyFluidsResources;
 import com.rcx.funkyfluids.FunkyFluidsResources.FluidStuff;
 
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.FluidTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
@@ -17,12 +20,12 @@ public class FunkyFluidsFluidTags extends FluidTagsProvider {
 	//tag for fluids that interact with lava the same way water does because they consist mostly of water
 	public static TagKey<Fluid> WATERY = FluidTags.create(new ResourceLocation(FunkyFluids.MODID, "watery"));
 
-	public FunkyFluidsFluidTags(DataGenerator gen, ExistingFileHelper existingFileHelper) {
-		super(gen, FunkyFluids.MODID, existingFileHelper);
+	public FunkyFluidsFluidTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
+		super(output, lookupProvider, FunkyFluids.MODID, existingFileHelper);
 	}
 
 	@Override
-	public void addTags() {
+	public void addTags(HolderLookup.Provider provider) {
 		for (FluidStuff fluid : FunkyFluidsResources.fluidList) {
 			tag(FluidTags.create(new ResourceLocation(FunkyFluids.MODID, fluid.name))).add(fluid.FLUID.get()).add(fluid.FLUID_FLOW.get());
 		}

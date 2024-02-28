@@ -30,5 +30,6 @@
     "recipes": [
       "funkyfluids:liquid_crystal_bucket"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

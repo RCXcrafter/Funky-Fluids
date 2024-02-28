@@ -1,47 +1,37 @@
 package com.rcx.funkyfluids.datagen;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
 
 import com.rcx.funkyfluids.FunkyFluids;
 import com.rcx.funkyfluids.FunkyFluidsResources;
 import com.rcx.funkyfluids.util.ConsumerWrapperBuilder;
-import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.content.contraptions.processing.HeatCondition;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipe;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipeSerializer;
-import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider.GeneratedRecipe;
 
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
 public class FunkyFluidsRecipes extends RecipeProvider implements IConditionBuilder {
 
-	public FunkyFluidsRecipes(DataGenerator gen) {
+	public FunkyFluidsRecipes(PackOutput gen) {
 		super(gen);
 	}
 
 	@Override
-	public void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.OOBLECK.FLUID_BUCKET.get())
+	public void buildRecipes(Consumer<FinishedRecipe> consumer) {
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, FunkyFluidsResources.OOBLECK.FLUID_BUCKET.get())
 		.requires(Tags.Items.CROPS_POTATO)
 		.requires(Tags.Items.CROPS_POTATO)
 		.requires(Items.WATER_BUCKET)
 		.unlockedBy("has_item", has(Items.WATER_BUCKET))
 		.save(ConsumerWrapperBuilder.wrap(FunkyFluidsResources.CONSUMING_SHAPELESS.get()).build(consumer), getResource("oobleck_bucket"));
 
-		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.MELONADE.FLUID_BUCKET.get())
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, FunkyFluidsResources.MELONADE.FLUID_BUCKET.get())
 		.requires(Items.MELON_SLICE)
 		.requires(Items.MELON_SLICE)
 		.requires(Items.SUGAR)
@@ -49,28 +39,28 @@ public class FunkyFluidsRecipes extends RecipeProvider implements IConditionBuil
 		.unlockedBy("has_item", has(Items.BUCKET))
 		.save(consumer, getResource("melonade_bucket"));
 
-		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.LIQUID_CRYSTAL.FLUID_BUCKET.get())
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, FunkyFluidsResources.LIQUID_CRYSTAL.FLUID_BUCKET.get())
 		.requires(Tags.Items.GEMS_AMETHYST)
 		.requires(Tags.Items.GEMS_AMETHYST)
 		.requires(Items.LAVA_BUCKET)
 		.unlockedBy("has_item", has(Items.LAVA_BUCKET))
 		.save(ConsumerWrapperBuilder.wrap(FunkyFluidsResources.CONSUMING_SHAPELESS.get()).build(consumer), getResource("liquid_crystal_bucket"));
 
-		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.SILLY_PUTTY.FLUID_BUCKET.get())
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, FunkyFluidsResources.SILLY_PUTTY.FLUID_BUCKET.get())
 		.requires(Tags.Items.SLIMEBALLS)
 		.requires(Items.PHANTOM_MEMBRANE)
 		.requires(Items.BUCKET)
 		.unlockedBy("has_item", has(Items.BUCKET))
 		.save(consumer, getResource("silly_putty_bucket"));
 
-		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.REDSTONE_SUSPENSION.FLUID_BUCKET.get())
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, FunkyFluidsResources.REDSTONE_SUSPENSION.FLUID_BUCKET.get())
 		.requires(Tags.Items.DUSTS_REDSTONE)
 		.requires(Tags.Items.DUSTS_REDSTONE)
 		.requires(Items.WATER_BUCKET)
 		.unlockedBy("has_item", has(Items.WATER_BUCKET))
 		.save(ConsumerWrapperBuilder.wrap(FunkyFluidsResources.CONSUMING_SHAPELESS.get()).build(consumer), getResource("redstone_suspension_bucket"));
 
-		ShapelessRecipeBuilder.shapeless(FunkyFluidsResources.MAGNETROLEUM.FLUID_BUCKET.get())
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, FunkyFluidsResources.MAGNETROLEUM.FLUID_BUCKET.get())
 		.requires(Tags.Items.DUSTS_REDSTONE)
 		.requires(Tags.Items.INGOTS_IRON)
 		.requires(Tags.Items.GEMS_LAPIS)
@@ -78,14 +68,14 @@ public class FunkyFluidsRecipes extends RecipeProvider implements IConditionBuil
 		.unlockedBy("has_item", has(Items.LAVA_BUCKET))
 		.save(ConsumerWrapperBuilder.wrap(FunkyFluidsResources.CONSUMING_SHAPELESS.get()).build(consumer), getResource("magnetroleum_bucket"));
 
-		createCompatRecipes(consumer);
+		//createCompatRecipes(consumer);
 	}
 
 	public ResourceLocation getResource(String name) {
 		return new ResourceLocation(FunkyFluids.MODID, name);
 	}
 
-	protected final List<GeneratedRecipe> all = new ArrayList<>();
+	/*protected final List<GeneratedRecipe> all = new ArrayList<>();
 
 	public void createCompatRecipes(Consumer<FinishedRecipe> consumer) {
 		create("oobleck_mixing", b -> b.require(Tags.Items.CROPS_POTATO).require(Tags.Items.CROPS_POTATO).require(FluidTags.WATER, 1000)
@@ -133,5 +123,5 @@ public class FunkyFluidsRecipes extends RecipeProvider implements IConditionBuil
 	public <T extends ProcessingRecipe<?>> GeneratedRecipe create(String name,
 			UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
 		return create(getResource(name), transform);
-	}
+	}*/
 }

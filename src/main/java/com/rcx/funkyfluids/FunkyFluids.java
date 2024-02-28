@@ -1,5 +1,8 @@
 package com.rcx.funkyfluids;
 
+import java.util.concurrent.CompletableFuture;
+
+import com.rcx.funkyfluids.FunkyFluidsResources.FluidStuff;
 import com.rcx.funkyfluids.datagen.FunkyFluidsBlockStates;
 import com.rcx.funkyfluids.datagen.FunkyFluidsBlockTags;
 import com.rcx.funkyfluids.datagen.FunkyFluidsFluidTags;
@@ -13,11 +16,15 @@ import com.rcx.funkyfluids.entities.FallingSillyPuttyRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -36,6 +43,7 @@ public class FunkyFluids {
 		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
 		modEventBus.addListener(this::commonSetup);
+		modEventBus.addListener(this::addToCreativeTab);
 		modEventBus.addListener(this::gatherData);
 
 		FunkyFluidsResources.RECIPE_SERIALIZERS.register(modEventBus);
@@ -54,22 +62,32 @@ public class FunkyFluids {
 		FunkyFluidsResources.registerDispenserBehaviour(event);
 	}
 
+	public void addToCreativeTab(BuildCreativeModeTabContentsEvent event) {
+		if (event.getTabKey().equals(CreativeModeTabs.TOOLS_AND_UTILITIES)) {
+			for (FluidStuff fluid : FunkyFluidsResources.fluidList) {
+				event.accept(fluid.FLUID_BUCKET);
+			}
+		}
+	}
+
 	public void gatherData(GatherDataEvent event) {
 		DataGenerator gen = event.getGenerator();
+		PackOutput output = gen.getPackOutput();
 
 		if (event.includeClient()) {
-			gen.addProvider(true, new FunkyFluidsLang(gen));
+			gen.addProvider(true, new FunkyFluidsLang(output));
 			ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-			ItemModelProvider itemModels = new FunkyFluidsItemModels(gen, existingFileHelper);
+			ItemModelProvider itemModels = new FunkyFluidsItemModels(output, existingFileHelper);
 			gen.addProvider(true, itemModels);
-			gen.addProvider(true, new FunkyFluidsBlockStates(gen, existingFileHelper));
+			gen.addProvider(true, new FunkyFluidsBlockStates(output, existingFileHelper));
 		} if (event.includeServer()) {
-			gen.addProvider(true, new FunkyFluidsLootTables(gen));
-			gen.addProvider(true, new FunkyFluidsRecipes(gen));
-			BlockTagsProvider blockTags = new FunkyFluidsBlockTags(gen, event.getExistingFileHelper());
+			gen.addProvider(true, new FunkyFluidsLootTables(output));
+			gen.addProvider(true, new FunkyFluidsRecipes(output));
+			CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+			BlockTagsProvider blockTags = new FunkyFluidsBlockTags(output, lookupProvider, event.getExistingFileHelper());
 			gen.addProvider(true, blockTags);
-			gen.addProvider(true, new FunkyFluidsItemTags(gen, blockTags, event.getExistingFileHelper()));
-			gen.addProvider(true, new FunkyFluidsFluidTags(gen, event.getExistingFileHelper()));
+			gen.addProvider(true, new FunkyFluidsItemTags(output, lookupProvider, blockTags.contentsGetter(), event.getExistingFileHelper()));
+			gen.addProvider(true, new FunkyFluidsFluidTags(output, lookupProvider, event.getExistingFileHelper()));
 		}
 	}
 

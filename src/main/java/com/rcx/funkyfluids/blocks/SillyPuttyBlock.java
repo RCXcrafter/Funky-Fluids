@@ -13,7 +13,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -111,7 +110,7 @@ public class SillyPuttyBlock extends LiquidBlock implements Fallable {
 
 	public boolean canFall(BlockState state, LevelAccessor level, BlockPos pos) {
 		BlockState below = level.getBlockState(pos.below());
-		return (below.isAir() || below.is(BlockTags.FIRE) || below.getMaterial().isReplaceable())
+		return (below.isAir() || below.is(BlockTags.FIRE) || below.canBeReplaced())
 				&& below.getBlock() != this
 				&& !isSupported(level, pos)
 				&& pos.getY() >= level.getMinBuildHeight();
@@ -152,7 +151,7 @@ public class SillyPuttyBlock extends LiquidBlock implements Fallable {
 	@Override
 	public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
 		// no fall damage
-		entityIn.causeFallDamage(fallDistance, 0.0F, DamageSource.FALL);
+		entityIn.causeFallDamage(fallDistance, 0.0F, worldIn.damageSources().fall());
 	}
 
 	@Override

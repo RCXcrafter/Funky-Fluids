@@ -4,7 +4,7 @@ import com.rcx.funkyfluids.FunkyFluids;
 import com.rcx.funkyfluids.FunkyFluidsResources;
 import com.rcx.funkyfluids.FunkyFluidsResources.FluidStuff;
 
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -14,7 +14,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class FunkyFluidsBlockStates extends BlockStateProvider {
 
-	public FunkyFluidsBlockStates(DataGenerator gen, ExistingFileHelper exFileHelper) {
+	public FunkyFluidsBlockStates(PackOutput gen, ExistingFileHelper exFileHelper) {
 		super(gen, FunkyFluids.MODID, exFileHelper);
 	}
 

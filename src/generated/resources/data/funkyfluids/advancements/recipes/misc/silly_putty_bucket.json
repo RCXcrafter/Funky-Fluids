@@ -30,5 +30,6 @@
     "recipes": [
       "funkyfluids:silly_putty_bucket"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

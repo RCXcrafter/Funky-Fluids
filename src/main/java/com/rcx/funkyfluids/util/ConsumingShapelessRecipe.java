@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
@@ -21,8 +22,8 @@ public class ConsumingShapelessRecipe extends ShapelessRecipe {
 	final ItemStack result;
 	final NonNullList<Ingredient> ingredients;
 
-	public ConsumingShapelessRecipe(ResourceLocation pId, String pGroup, ItemStack pResult, NonNullList<Ingredient> pIngredients) {
-		super(pId, pGroup, pResult, pIngredients);
+	public ConsumingShapelessRecipe(ResourceLocation pId, String pGroup, CraftingBookCategory pCategory, ItemStack pResult, NonNullList<Ingredient> pIngredients) {
+		super(pId, pGroup, pCategory, pResult, pIngredients);
 		this.group = pGroup;
 		this.result = pResult;
 		this.ingredients = pIngredients;
@@ -37,6 +38,7 @@ public class ConsumingShapelessRecipe extends ShapelessRecipe {
 
 		public ConsumingShapelessRecipe fromJson(ResourceLocation pRecipeId, JsonObject pJson) {
 			String s = GsonHelper.getAsString(pJson, "group", "");
+			CraftingBookCategory craftingbookcategory = CraftingBookCategory.CODEC.byName(GsonHelper.getAsString(pJson, "category", (String)null), CraftingBookCategory.MISC);
 			NonNullList<Ingredient> nonnulllist = itemsFromJson(GsonHelper.getAsJsonArray(pJson, "ingredients"));
 			if (nonnulllist.isEmpty()) {
 				throw new JsonParseException("No ingredients for shapeless recipe");
@@ -44,7 +46,7 @@ public class ConsumingShapelessRecipe extends ShapelessRecipe {
 				throw new JsonParseException("Too many ingredients for shapeless recipe. The maximum is 9");
 			} else {
 				ItemStack itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pJson, "result"));
-				return new ConsumingShapelessRecipe(pRecipeId, s, itemstack, nonnulllist);
+				return new ConsumingShapelessRecipe(pRecipeId, s, craftingbookcategory, itemstack, nonnulllist);
 			}
 		}
 
@@ -59,17 +61,19 @@ public class ConsumingShapelessRecipe extends ShapelessRecipe {
 
 		public ConsumingShapelessRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
 			String s = pBuffer.readUtf();
+			CraftingBookCategory craftingbookcategory = pBuffer.readEnum(CraftingBookCategory.class);
 			int i = pBuffer.readVarInt();
 			NonNullList<Ingredient> nonnulllist = NonNullList.withSize(i, Ingredient.EMPTY);
 			for(int j = 0; j < nonnulllist.size(); ++j) {
 				nonnulllist.set(j, Ingredient.fromNetwork(pBuffer));
 			}
 			ItemStack itemstack = pBuffer.readItem();
-			return new ConsumingShapelessRecipe(pRecipeId, s, itemstack, nonnulllist);
+			return new ConsumingShapelessRecipe(pRecipeId, s, craftingbookcategory, itemstack, nonnulllist);
 		}
 
 		public void toNetwork(FriendlyByteBuf pBuffer, ConsumingShapelessRecipe pRecipe) {
 			pBuffer.writeUtf(pRecipe.group);
+			pBuffer.writeEnum(pRecipe.category());
 			pBuffer.writeVarInt(pRecipe.ingredients.size());
 			for(Ingredient ingredient : pRecipe.ingredients) {
 				ingredient.toNetwork(pBuffer);

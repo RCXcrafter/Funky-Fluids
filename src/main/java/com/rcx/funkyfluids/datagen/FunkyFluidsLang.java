@@ -6,13 +6,13 @@ import com.rcx.funkyfluids.FunkyFluids;
 import com.rcx.funkyfluids.FunkyFluidsResources;
 import com.rcx.funkyfluids.FunkyFluidsResources.FluidStuff;
 
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
 
 public class FunkyFluidsLang extends LanguageProvider {
 
-	public FunkyFluidsLang(DataGenerator gen) {
+	public FunkyFluidsLang(PackOutput gen) {
 		super(gen, FunkyFluids.MODID, "en_us");
 	}
 

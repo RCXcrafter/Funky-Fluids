@@ -1,5 +1,6 @@
 {
   "type": "funkyfluids:crafting_shapeless_consuming",
+  "category": "redstone",
   "ingredients": [
     {
       "tag": "forge:dusts/redstone"

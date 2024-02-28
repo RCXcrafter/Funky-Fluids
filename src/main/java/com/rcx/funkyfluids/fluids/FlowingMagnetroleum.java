@@ -26,7 +26,7 @@ public class FlowingMagnetroleum extends ForgeFlowingFluid.Flowing {
 				float f = fluidstate.getOwnHeight();
 				float f1 = 0.0F;
 				if (f == 0.0F) {
-					if (!pBlockReader.getBlockState(blockpos$mutableblockpos).getMaterial().blocksMotion()) {
+					if (!pBlockReader.getBlockState(blockpos$mutableblockpos).blocksMotion()) {
 						BlockPos blockpos = blockpos$mutableblockpos.below();
 						FluidState fluidstate1 = pBlockReader.getFluidState(blockpos);
 						if (this.affectsFlow(fluidstate1)) {

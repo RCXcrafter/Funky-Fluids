@@ -33,14 +33,14 @@ public class OobleckType extends FunkyFluidType {
 			entity.setOnGround(true);
 			entity.setSwimming(false);
 
-			float f3 = entity.isOnGround() ? FRICTION * 0.91F : 0.91F;
+			float f3 = entity.onGround() ? FRICTION * 0.91F : 0.91F;
 			Vec3 vec35 = entity.handleRelativeFrictionAndCalculateMovement(movementVector, FRICTION);
 			double d2 = vec35.y;
 			if (entity.hasEffect(MobEffects.LEVITATION)) {
 				d2 += (0.05D * (double)(entity.getEffect(MobEffects.LEVITATION).getAmplifier() + 1) - vec35.y) * 0.2D;
 				entity.resetFallDistance();
-			} else if (entity.level.isClientSide && !entity.level.hasChunkAt(entity.blockPosition())) {
-				if (entity.getY() > (double)entity.level.getMinBuildHeight()) {
+			} else if (entity.level().isClientSide() && !entity.level().hasChunkAt(entity.blockPosition())) {
+				if (entity.getY() > (double)entity.level().getMinBuildHeight()) {
 					d2 = -0.1D;
 				} else {
 					d2 = 0.0D;
@@ -68,7 +68,7 @@ public class OobleckType extends FunkyFluidType {
 				f6 = 3.0F;
 			}
 
-			if (!entity.isOnGround()) {
+			if (!entity.onGround()) {
 				f6 *= 0.5F;
 			}
 

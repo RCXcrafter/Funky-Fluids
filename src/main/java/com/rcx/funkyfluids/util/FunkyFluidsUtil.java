@@ -15,10 +15,10 @@ public class FunkyFluidsUtil {
 		int j = Mth.floor(entity.getY() - (double)0.2F);
 		int k = Mth.floor(entity.getZ());
 		BlockPos blockpos = new BlockPos(i, j, k);
-		BlockState blockstate = entity.level.getBlockState(blockpos);
-		if(!blockstate.addRunningEffects(entity.level, blockpos, entity)) {
+		BlockState blockstate = entity.level().getBlockState(blockpos);
+		if(!blockstate.addRunningEffects(entity.level(), blockpos, entity)) {
 			Vec3 vec3 = entity.getDeltaMovement();
-			entity.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate).setPos(blockpos), entity.getX() + (entity.level.random.nextDouble() - 0.5D) * (double)entity.getBbWidth(), entity.getY() + 0.1D, entity.getZ() + (entity.level.random.nextDouble() - 0.5D) * (double)entity.getBbWidth(), vec3.x * -4.0D, 1.5D, vec3.z * -4.0D);
+			entity.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate).setPos(blockpos), entity.getX() + (entity.level().getRandom().nextDouble() - 0.5D) * (double)entity.getBbWidth(), entity.getY() + 0.1D, entity.getZ() + (entity.level().getRandom().nextDouble() - 0.5D) * (double)entity.getBbWidth(), vec3.x * -4.0D, 1.5D, vec3.z * -4.0D);
 		}
 	}
 }

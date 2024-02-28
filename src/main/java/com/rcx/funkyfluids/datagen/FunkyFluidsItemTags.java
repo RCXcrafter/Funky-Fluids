@@ -1,20 +1,23 @@
 package com.rcx.funkyfluids.datagen;
 
+import java.util.concurrent.CompletableFuture;
+
 import com.rcx.funkyfluids.FunkyFluids;
 
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class FunkyFluidsItemTags extends ItemTagsProvider {
 
-	public FunkyFluidsItemTags(DataGenerator gen, BlockTagsProvider blockTags, ExistingFileHelper existingFileHelper) {
-		super(gen, blockTags, FunkyFluids.MODID, existingFileHelper);
+	public FunkyFluidsItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTagProvider, ExistingFileHelper existingFileHelper) {
+		super(output, lookupProvider, blockTagProvider, FunkyFluids.MODID, existingFileHelper);
 	}
 
 	@Override
-	protected void addTags() {
+	protected void addTags(HolderLookup.Provider provider) {
 
 	}
 }

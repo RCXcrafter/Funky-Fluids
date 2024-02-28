@@ -25,7 +25,7 @@ public class WateryType extends FunkyFluidType {
 			f6 = 3.0F;
 		}
 
-		if (!entity.isOnGround()) {
+		if (!entity.onGround()) {
 			f6 *= 0.5F;
 		}
 

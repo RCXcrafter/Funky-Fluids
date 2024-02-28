@@ -1,16 +1,16 @@
 package com.rcx.funkyfluids.util;
-
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+/*
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraftforge.client.model.obj.ObjMaterialLibrary.Material;
 
 public class FunkyFluidsMaterials {
 
-	public static final Material OOBLECK_MATERIAL = new FunkyFluidsMaterials.Builder(MaterialColor.WOOL).noCollider().notSolidBlocking().nonSolid().destroyOnPush().replaceable().liquid().build();
-	public static final Material RED_FLUID_MATERIAL = new FunkyFluidsMaterials.Builder(MaterialColor.COLOR_RED).noCollider().notSolidBlocking().nonSolid().destroyOnPush().replaceable().liquid().build();
-	public static final Material LIQUID_CRYSTAL_MATERIAL = new FunkyFluidsMaterials.Builder(MaterialColor.COLOR_PURPLE).noCollider().notPushable().liquid().build();
-	public static final Material SILLY_PUTTY_MATERIAL = new FunkyFluidsMaterials.Builder(MaterialColor.COLOR_MAGENTA).notSolidBlocking().nonSolid().destroyOnPush().replaceable().liquid().build();
-	public static final Material PURPLE_FLUID_MATERIAL = new FunkyFluidsMaterials.Builder(MaterialColor.COLOR_PURPLE).noCollider().notSolidBlocking().nonSolid().destroyOnPush().replaceable().liquid().build();
+	public static final Material OOBLECK_MATERIAL = new FunkyFluidsMaterials.Builder(MapColor.WOOL).noCollider().notSolidBlocking().nonSolid().destroyOnPush().replaceable().liquid().build();
+	public static final Material RED_FLUID_MATERIAL = new FunkyFluidsMaterials.Builder(MapColor.COLOR_RED).noCollider().notSolidBlocking().nonSolid().destroyOnPush().replaceable().liquid().build();
+	public static final Material LIQUID_CRYSTAL_MATERIAL = new FunkyFluidsMaterials.Builder(MapColor.COLOR_PURPLE).noCollider().notPushable().liquid().build();
+	public static final Material SILLY_PUTTY_MATERIAL = new FunkyFluidsMaterials.Builder(MapColor.COLOR_MAGENTA).notSolidBlocking().nonSolid().destroyOnPush().replaceable().liquid().build();
+	public static final Material PURPLE_FLUID_MATERIAL = new FunkyFluidsMaterials.Builder(MapColor.COLOR_PURPLE).noCollider().notSolidBlocking().nonSolid().destroyOnPush().replaceable().liquid().build();
 
 	public static class Builder {
 		private PushReaction pushReaction = PushReaction.NORMAL;
@@ -19,10 +19,10 @@ public class FunkyFluidsMaterials {
 		private boolean liquid;
 		private boolean replaceable;
 		private boolean solid = true;
-		private final MaterialColor color;
+		private final MapColor color;
 		private boolean solidBlocking = true;
 
-		public Builder(MaterialColor pColor) {
+		public Builder(MapColor pColor) {
 			this.color = pColor;
 		}
 
@@ -70,4 +70,4 @@ public class FunkyFluidsMaterials {
 			return new Material(this.color, this.liquid, this.solid, this.blocksMotion, this.solidBlocking, this.flammable, this.replaceable, this.pushReaction);
 		}
 	}
-}
+}*/

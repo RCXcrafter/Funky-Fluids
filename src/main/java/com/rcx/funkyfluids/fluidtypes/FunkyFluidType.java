@@ -3,9 +3,10 @@ package com.rcx.funkyfluids.fluidtypes;
 import java.awt.Color;
 import java.util.function.Consumer;
 
+import org.joml.Vector3f;
+
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.math.Vector3f;
 import com.rcx.funkyfluids.FunkyFluids;
 
 import net.minecraft.client.Camera;

@@ -31,10 +31,10 @@ public class FallingSillyPuttyRenderer extends EntityRenderer<FallingSillyPuttyE
 	@Override
 	public void render(FallingSillyPuttyEntity pEntity, float pEntityYaw, float pPartialTicks, PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight) {
 		BlockState blockstate = pEntity.getBlockState();
-		Level level = pEntity.getLevel();
+		Level level = pEntity.level();
 		if (blockstate != level.getBlockState(pEntity.blockPosition())/* && blockstate.getRenderShape() != RenderShape.INVISIBLE*/) {
 			pMatrixStack.pushPose();
-			BlockPos blockpos = new BlockPos(pEntity.getX(), pEntity.getBoundingBox().maxY, pEntity.getZ());
+			BlockPos blockpos = BlockPos.containing(pEntity.getX(), pEntity.getBoundingBox().maxY, pEntity.getZ());
 			pMatrixStack.translate(-0.5D, 0.0D, -0.5D);
 			var model = this.dispatcher.getBlockModel(blockstate);
 			for (var renderType : model.getRenderTypes(blockstate, RandomSource.create(blockstate.getSeed(pEntity.getStartPos())), ModelData.EMPTY))

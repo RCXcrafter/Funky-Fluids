@@ -3,7 +3,6 @@ package com.rcx.funkyfluids.fluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
@@ -35,7 +34,7 @@ public class FlowingSillyPutty extends ForgeFlowingFluid.Flowing {
 		}
 	}
 
-	public FluidState getNewLiquid(LevelReader pLevel, BlockPos pPos, BlockState pBlockState) {
+	public FluidState getNewLiquid(Level pLevel, BlockPos pPos, BlockState pBlockState) {
 		int i = pBlockState.getFluidState().getAmount();
 		int j = 0;
 		int l = 0;
@@ -56,7 +55,7 @@ public class FlowingSillyPutty extends ForgeFlowingFluid.Flowing {
 		if (j >= 2) {
 			BlockState blockstate1 = pLevel.getBlockState(pPos.below());
 			FluidState fluidstate1 = blockstate1.getFluidState();
-			if (blockstate1.getMaterial().isSolid() || this.isSourceBlockOfThisType(fluidstate1)) {
+			if (blockstate1.isSolid() || this.isSourceBlockOfThisType(fluidstate1)) {
 				return this.getSource(false);
 			}
 		}
